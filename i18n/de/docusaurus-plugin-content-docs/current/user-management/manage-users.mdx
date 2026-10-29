@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Benutzer verwalten
 
-## Verwaltung über Logto Console \{#manage-via-logto-console}
+## Verwaltung über die Logto Console \{#manage-via-logto-console}
 
 ### Benutzer durchsuchen und suchen \{#browse-and-search-users}
 
@@ -22,7 +22,7 @@ Es wird die Schlüsselwortsuche für [`name`](/user-management/user-data#name), 
 
 Mit der Console können Entwickler neue Konten für Endbenutzer erstellen. Klicke dazu auf die Schaltfläche „Benutzer hinzufügen“ in der oberen rechten Ecke des Bildschirms.
 
-Beim Erstellen eines Benutzers in der Logto Console musst du mindestens einen Identifikator angeben: `primäre E-Mail`, `primäre Telefonnummer` oder `Benutzername`. Das Feld `Name` ist optional. Diese Anforderung gilt nur für die Console. Der [Create user endpoint](https://openapi.logto.io/operation/operation-createuser) der Management API kann einen Benutzer auch ohne einen dieser Identifikatoren erstellen.
+Beim Erstellen eines Benutzers in der Logto Console musst du mindestens einen Identifikator angeben: `primäre E-Mail`, `primäre Telefonnummer` oder `Benutzername`. Das Feld `Name` ist optional. Diese Anforderung gilt nur für die Console. Das [Create user endpoint](https://openapi.logto.io/operation/operation-createuser) der Management API kann einen Benutzer auch ohne einen dieser Identifikatoren erstellen.
 
 Nachdem der Benutzer erstellt wurde, generiert Logto automatisch ein zufälliges Passwort. Das Anfangspasswort wird nur einmal angezeigt, aber du kannst das Passwort später [zurücksetzen](./manage-users#reset-user-password). Wenn du ein bestimmtes Passwort festlegen möchtest, verwende die Management API `patch /api/users/{userId}/password`, um es nach der Erstellung des Benutzers zu aktualisieren.
 
@@ -30,7 +30,7 @@ Du kannst die **eingegebenen Identifikatoren (E-Mail-Adresse / Telefonnummer / B
 
 :::tip
 
-Wenn du eine Registrierung nur auf Einladung implementieren möchtest, empfehlen wir, [Benutzer mit einem Magic Link einzuladen](/end-user-flows/sign-up-and-sign-in/disable-user-registration#option-1-invite-user-with-magic-link-recommended). Dadurch können sich nur auf der Whitelist stehende Benutzer selbst registrieren und ihr eigenes Passwort festlegen.
+Wenn du eine Registrierung nur auf Einladung implementieren möchtest, empfehlen wir, [Benutzer mit einem Magic Link einzuladen](/end-user-flows/sign-up-and-sign-in/disable-user-registration#option-1-invite-user-with-magic-link-recommended). Dadurch können sich nur zugelassene Benutzer selbst registrieren und ihr eigenes Passwort festlegen.
 
 :::
 
@@ -43,24 +43,24 @@ Um die Details eines Benutzers anzuzeigen, klicke einfach auf die entsprechende 
   - **Telefonnummer** ([primary_phone](/user-management/user-data#primary_phone)): Bearbeitbar
   - **Benutzername** ([username](/user-management/user-data#username)): Bearbeitbar
   - **Passwort** ([has_password](/user-management/user-data#has_password)): Du kannst ein zufälliges Passwort neu generieren. Mehr dazu unter "[Benutzerpasswort zurücksetzen](#reset-user-password)".
-  - **Multi-Faktor-Authentifizierung (Multi-factor authentication)** ([mfa_verification_factor](/user-management/user-data#mfa_verification_factors)): Zeige alle Authentifizierungsfaktoren an (z. B. Passkeys, Authenticator-Apps, Backup-Codes), die dieser Benutzer eingerichtet hat. Faktoren können in der Console entfernt werden.
-  - **Passkeys**: Wenn [Passkey-Anmeldung](/end-user-flows/sign-up-and-sign-in/passkey-sign-in) im Mandanten aktiviert ist, kannst du auf der Seite mit den Benutzerdetails auch die Anmelde-Passkeys des Benutzers anzeigen und bei Bedarf entfernen. Diese Passkeys basieren auf demselben WebAuthn-Credential-Modell wie bei MFA.
+  - **Multi-Faktor-Authentifizierung (MFA)** ([mfa_verification_factor](/user-management/user-data#mfa_verification_factors)): Zeige alle Authentifizierungsfaktoren (z. B. Passkeys, Authenticator-Apps, Backup-Codes) an, die dieser Benutzer eingerichtet hat. Faktoren können in der Console entfernt werden.
+  - **Passkeys**: Wenn [Passkey-Anmeldung](/end-user-flows/sign-up-and-sign-in/passkey-sign-in) im Mandanten aktiviert ist, kannst du auf der Seite mit den Benutzerdetails auch die Anmelde-Passkeys des Benutzers anzeigen und bei Bedarf entfernen. Diese Passkeys basieren auf demselben WebAuthn-Credential-Modell wie MFA.
   - **Personal Access Token**: Erstellen, anzeigen, umbenennen und löschen von [Personal Access Tokens](/user-management/personal-access-token).
 - **Verbindung**:
   - **Soziale Verbindungen** ([identities](/user-management/user-data#social-identities)):
-    - Zeige die verknüpften sozialen Konten des Benutzers an, einschließlich sozialer IDs und Profildetails, die von den sozialen Anbietern synchronisiert wurden (z. B. erscheint ein „Facebook“-Eintrag, wenn sich der Benutzer über Facebook angemeldet hat).
+    - Zeige die verknüpften sozialen Konten des Benutzers an, einschließlich Social-IDs und Profildetails, die von den sozialen Anbietern synchronisiert wurden (z. B. erscheint ein „Facebook“-Eintrag, wenn sich der Benutzer über Facebook angemeldet hat).
     - Du kannst bestehende soziale Identitäten entfernen, aber keine neuen sozialen Konten im Namen des Benutzers verknüpfen.
-    - Für Social Connectors mit aktiviertem [Token-Speicher](/secret-vault/federated-token-set) kannst du Zugangstokens und Auffrischungstokens auf der Verbindungsdetailseite anzeigen und verwalten.
+    - Für Social Connectors mit aktiviertem [Token-Speicher](/secret-vault/federated-token-set) kannst du auf der Verbindungsdetailseite Zugangstokens und Auffrischungstokens anzeigen und verwalten.
   - **Enterprise SSO-Verbindungen** ([sso_identities](/user-management/user-data#sso-identities)):
-    - Zeige die verknüpften Enterprise-Identitäten des Benutzers an, einschließlich Enterprise-IDs und Profildetails, die von den Enterprise-Identitätsanbietern synchronisiert wurden.
-    - Du kannst Enterprise SSO-Identitäten in der Console nicht hinzufügen oder entfernen.
-    - Für OIDC-basierte Enterprise Connectors mit aktiviertem [Token-Speicher](/secret-vault/federated-token-set) kannst du Tokens auf der Verbindungsdetailseite anzeigen und löschen.
-- **Benutzerprofildaten**: Name, Avatar-URL, benutzerdefinierte Daten und zusätzliche OpenID Connect Standardansprüche, die nicht enthalten sind. Alle diese Profilfelder sind bearbeitbar.
+    - Zeige die verknüpften Enterprise-Identitäten des Benutzers an, einschließlich Enterprise-IDs und Profildetails, die von ihren Enterprise-Identitätsanbietern synchronisiert wurden.
+    - Du kannst in der Console keine Enterprise SSO-Identitäten hinzufügen oder entfernen.
+    - Für OIDC-basierte Enterprise Connectors mit aktiviertem [Token-Speicher](/secret-vault/federated-token-set) kannst du auf der Verbindungsdetailseite Tokens anzeigen und löschen.
+- **Benutzerprofildaten**: Name, Avatar-URL, benutzerdefinierte Daten und zusätzliche OpenID Connect Standard-Claims, die nicht enthalten sind. Alle diese Profilfelder sind bearbeitbar.
 - **Sitzungen**: Zeige die Liste der aktiven Benutzersitzungen an, einschließlich Geräteinformationen, sessionId und GEO-Standort, falls zutreffend. Zeige weitere Details einer Sitzung an und widerrufe sie auf der Sitzungsdetailseite.
 
 :::warning
 
-Es ist wichtig zu bestätigen, dass der Benutzer eine alternative Anmeldemethode hat, bevor eine soziale Verbindung entfernt wird, z. B. eine andere soziale Verbindung, Telefonnummer, E-Mail oder Benutzername-mit-Passwort. Wenn der Benutzer keine andere Anmeldemethode hat, kann er nach dem Entfernen der sozialen Verbindung nicht mehr auf sein Konto zugreifen.
+Es ist wichtig zu bestätigen, dass der Benutzer eine alternative Anmeldemethode hat, bevor du eine soziale Verbindung entfernst, z. B. eine andere soziale Verbindung, Telefonnummer, E-Mail oder Benutzername-mit-Passwort. Wenn der Benutzer keine andere Anmeldemethode hat, kann er nach dem Entfernen der sozialen Verbindung nicht mehr auf sein Konto zugreifen.
 
 :::
 
@@ -90,17 +90,23 @@ Nachdem du das Passwort zurückgesetzt hast, kopiere es und sende es an den Endb
 
 Du kannst in der Logto Console kein bestimmtes Passwort für Benutzer festlegen, aber du kannst die [Management API](/integrate-logto/interact-with-management-api) `PATCH /api/users/{userId}/password` verwenden, um ein Passwort anzugeben.
 
+### Benutzerpasswort ablaufen lassen \{#expire-user-password}
+
+Wenn das Passwort eines Benutzers möglicherweise kompromittiert wurde, kannst du es ablaufen lassen, sodass der Benutzer es bei der nächsten Anmeldung zurücksetzen muss. Auf der Seite „Benutzerdetails“ klicke auf die „Ablaufen“-Schaltfläche neben dem Passwort des Benutzers und bestätige. Du kannst auch die Management API [`PATCH /api/users/{userId}/password/expiration`](https://openapi.logto.io/operation/operation-updateuserpasswordexpiration) mit `{ "isExpired": true }` aufrufen.
+
+Dazu muss die [Passwortablauf-Richtlinie](/security/password-policy#password-expiration) aktiviert sein. Nach Eingabe des richtigen Passworts wird der Benutzer zum „Passwort vergessen“-Flow weitergeleitet, um sich mit einem an seine E-Mail oder Telefonnummer gesendeten Code zu verifizieren und ein neues Passwort festzulegen. Das Ablaufenlassen eines Passworts beendet bestehende Sitzungen nicht, daher solltest du auch [die aktiven Sitzungen des Benutzers widerrufen](#manage-user-active-sessions), wenn du den Zugriff sofort beenden möchtest.
+
 ### Aktive Benutzersitzungen verwalten \{#manage-user-active-sessions}
 
 Auf der Seite „Benutzerdetails“ navigiere zur Seite „Sitzungsdetails“, indem du auf die „Verwalten“-Schaltfläche einer bestimmten Sitzung klickst. Hier kannst du detaillierte Informationen zur Sitzung anzeigen, wie Gerät, Standort und Anmeldezeit. Wenn du den Benutzer aus dieser Sitzung abmelden möchtest, klicke einfach auf die Schaltfläche „Sitzung widerrufen“ oben rechts, und die Sitzung wird sofort widerrufen.
 
 - Standardmäßig wird beim Widerrufen einer Sitzung in der Console auch alle zugehörigen First-Party-App-Berechtigungen widerrufen, und der Benutzer muss sich erneut anmelden, um den Zugriff wiederherzustellen. Alle zuvor ausgestellten opaken Zugangstokens und Auffrischungstokens für First-Party-Apps werden ebenfalls sofort widerrufen.
-- Für Drittanbieter-Apps mit der Berechtigung `offline_access` widerruft das Widerrufen einer Sitzung standardmäßig nicht die App-Berechtigung. Alle zuvor ausgestellten Auffrischungstokens können weiterhin verwendet werden, bis das früheste von Berechtigungsablauf, Auffrischungstokenablauf oder explizitem Widerruf erreicht ist.
+- Für Drittanbieter-Apps mit dem `offline_access`-Scope widerruft das Widerrufen einer Sitzung standardmäßig nicht die App-Berechtigung. Alle zuvor ausgestellten Auffrischungstokens können weiterhin verwendet werden, bis das früheste von Berechtigungsablauf, Auffrischungstoken-Ablauf oder explizitem Widerruf eintritt.
 
 ### Autorisierte Drittanbieter-Apps des Benutzers verwalten \{#manage-user-authorized-third-party-apps}
 
 Auf der Seite „Benutzerdetails“ kannst du im Abschnitt „Autorisierte Drittanbieter-Apps“ den Autorisierungsstatus der Apps für den Benutzer überprüfen.
-Dieser Abschnitt basiert auf den APIs zur Verwaltung autorisierter Benutzer-Apps (Grants).
+Dieser Abschnitt basiert auf den APIs zur Verwaltung autorisierter Apps (Grants) des Benutzers.
 
 Für jede autorisierte App zeigt die Console an:
 
@@ -112,27 +118,27 @@ Wenn du den Zugriff entfernen musst, klicke auf die Widerruf-Aktion und bestäti
 
 Das Widerrufen einer App-Autorisierung entfernt alle aktiven Drittanbieter-Berechtigungen, die mit dieser App für den Benutzer verbunden sind. Es werden auch alle zuvor ausgestellten opaken Zugangstokens und Auffrischungstokens für diese App sofort widerrufen.
 
-## Passwortkonformitätsprüfung \{#password-compliance-check}
+## Passwort-Compliance-Prüfung \{#password-compliance-check}
 
-Nachdem du die [Passwortrichtlinie](/security/password-policy) in Logto aktualisiert hast, können sich bestehende Benutzer weiterhin mit ihren aktuellen Passwörtern anmelden. Nur neu erstellte Konten müssen die aktualisierte Passwortrichtlinie befolgen.
+Nachdem du die [Passwortrichtlinie](/security/password-policy) in Logto aktualisiert hast, können sich bestehende Benutzer weiterhin mit ihren aktuellen Passwörtern anmelden. Nur neu erstellte Konten müssen die aktualisierte Passwortrichtlinie einhalten.
 
-Um eine stärkere Sicherheit durchzusetzen, kannst du die `POST /api/sign-in-exp/default/check-password` [API](https://openapi.logto.io/operation/operation-checkpasswordwithdefaultsigninexperience) verwenden, um zu überprüfen, ob das Passwort eines Benutzers der aktuellen Richtlinie in der Standard-Anmeldeerfahrung entspricht. Falls nicht, kannst du den Benutzer mit einem benutzerdefinierten Ablauf auffordern, sein Passwort mit der [Account API](/end-user-flows/account-settings/by-management-api#user-password-management) zu aktualisieren.
+Um eine stärkere Sicherheit durchzusetzen, kannst du die `POST /api/sign-in-exp/default/check-password` [API](https://openapi.logto.io/operation/operation-checkpasswordwithdefaultsigninexperience) verwenden, um zu überprüfen, ob das Passwort eines Benutzers der aktuellen Richtlinie in der Standard-Anmeldeerfahrung entspricht. Falls nicht, kannst du den Benutzer mit einem eigenen Flow auffordern, sein Passwort über die [Account API](/end-user-flows/account-settings/by-management-api#user-password-management) zu aktualisieren.
 
 ### Rollen von Benutzern verwalten \{#manage-roles-of-users}
 
-Im Tab „Rollen“ auf der Seite mit den Benutzerdetails kannst du ganz einfach Rollen zuweisen oder entfernen, um das gewünschte Ergebnis zu erzielen. Siehe [Rollenbasierte Zugangskontrolle (RBAC)](/authorization/role-based-access-control) für Details.
+Im Tab „Rollen“ auf der Seite mit den Benutzerdetails kannst du Rollen einfach zuweisen oder entfernen, um das gewünschte Ergebnis zu erzielen. Siehe [Rollenbasierte Zugangskontrolle (RBAC)](/authorization/role-based-access-control) für Details.
 
 ### Zugehörige Organisationen des Benutzers anzeigen \{#view-the-organizations-the-user-belongs-to}
 
 Logto unterstützt [Organisationen](/organizations/organization-management) und kann deren Mitglieder verwalten. Du kannst Benutzerdetails einfach anzeigen und sehen, zu welcher Organisation sie gehören.
 
-## Verwaltung über Logto Management API \{#manage-via-logto-management-api}
+## Verwaltung über die Logto Management API \{#manage-via-logto-management-api}
 
 [Management API](/concepts/core-service/#management-api) ist eine Sammlung von APIs, die Zugriff auf den Logto-Backend-Service bieten. Wie bereits erwähnt, ist die Benutzer-API ein wichtiger Bestandteil dieses Dienstes und kann eine Vielzahl von Szenarien unterstützen.
 
 Die benutzerbezogenen [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) APIs sind unter `/api/users` verfügbar, mit Ausnahme der Benutzeraktivitäten, d. h. Benutzerprotokolle unter `/api/logs?userId=:userId`.
 
-Du kannst Benutzer über die Management API in verschiedenen Anwendungsfällen verwalten, z. B. [erweiterte Benutzersuche](/user-management/advanced-user-search), [Massenkontenerstellung](https://openapi.logto.io/operation/operation-createuser), [Registrierung nur auf Einladung](/end-user-flows/sign-up-and-sign-in/disable-user-registration) usw.
+Du kannst Benutzer über die Management API in verschiedenen Anwendungsfällen verwalten, z. B. [erweiterte Benutzersuche](/user-management/advanced-user-search), [Massenanlage von Konten](https://openapi.logto.io/operation/operation-createuser), [Registrierung nur auf Einladung](/end-user-flows/sign-up-and-sign-in/disable-user-registration) usw.
 
 ## FAQs \{#faqs}
 
